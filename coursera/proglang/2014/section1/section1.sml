@@ -3,22 +3,22 @@
 fun is_older (x: int * int * int, y: int * int * int) =
   let
     fun date_to_int( x: int * int * int) =
-        #1 x * 10000 + #2 x * 100 + #3 x 
+        #1 x * 10000 + #2 x * 100 + #3 x
   in
-    if date_to_int(x) < date_to_int(y) then 
+    if date_to_int(x) < date_to_int(y) then
       true
-    else 
+    else
       false
   end
 
 (* task 2 *)
 fun number_in_month(mlist: ( int * int * int) list, month: int) =
-  if null mlist then 
+  if null mlist then
     0
-  else 
-    if #2 (hd mlist) = month then 
+  else
+    if #2 (hd mlist) = month then
       1 + number_in_month(tl mlist, month)
-    else 
+    else
       number_in_month(tl mlist,month)
 
 (* task 3 *)
@@ -55,7 +55,7 @@ fun get_nth(strings: string list, pos: int) =
     get_nth(tl strings,pos - 1)
 
 (* task 7 *)
-fun date_to_string( d: int*int*int ) =
+fun date_to_string( d:( int*int*int) ) =
   let
     val month_strings = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
   in
@@ -86,10 +86,13 @@ fun what_month(day: int) =
 
 (* task 10 *)
 fun month_range(day1: int, day2:int) =
-  if day1 >= day2 then
-    [what_month(day2)]
+  if day1 > day2 then
+    []
   else
-      what_month(day1)::month_range(day1+1,day2)
+    if day1 >= day2 then
+      [what_month(day2)]
+    else
+        what_month(day1)::month_range(day1+1,day2)
 
 (* task 11 *)
 fun oldest ( dates: (int*int*int) list ) =
