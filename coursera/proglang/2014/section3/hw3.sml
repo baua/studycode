@@ -115,16 +115,18 @@ fun check_pat pattern =
     fun aux(p,acc) =
       case p of
           Variable x => x::acc
-          | TupleP ps => List.foldl (fn(ph) => aux(ph,acc)) acc ps
-          | ConstructorP(_,pa) => aux(pa,acc)
-          | _ => []
-    (*fun unique xs =
+          | TupleP ps => List.foldl (fn(ph,yh) => aux(ph,yh)) acc ps
+          | ConstructorP(_,ps) => aux(ps,acc)
+          | _ => acc
+    fun unique xs =
       case xs of
          [] => true
-       | h::[] => true
-       | h::n::t => if h = n then false else unique(n::t) *)
+       | h::t => if List.exists ( fn y => h = y ) t then
+                    false
+                 else
+                   unique t
   in
-    aux(pattern,[])
+    unique(aux(pattern,[]))
   end
 
 (* task 11 *)
