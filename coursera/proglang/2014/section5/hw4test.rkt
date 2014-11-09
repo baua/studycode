@@ -1,11 +1,12 @@
 #lang racket
 ;; Programming Languages Homework4 Simple Test
 ;; Save this file to the same directory as your homework file
-;; These are basic tests. Passing these tests does not guarantee that your code will pass the actual homework grader
+;; These are basic tests. Passing these tests does not guarantee that your code 
+;; will pass the actual homework grader
 
 ;; Be sure to put your homework file in the same folder as this test file.
 ;; Uncomment the line below and change HOMEWORK_FILE to the name of your homework file.
-;;(require "HOMEWORK_FILE")
+(require "hw4.rkt")
 (require rackunit)
 
 ;; Helper functions
@@ -18,7 +19,9 @@
    
    ; sequence test
    (check-equal? (sequence 0 5 1) (list 0 1 2 3 4 5) "Sequence test")
-
+   (check-equal? (sequence 1 2 3) (list 1) "Sequence test")
+   (check-equal? (sequence 3 2 1) null "Sequence test")
+   (check-equal? (sequence 2 2 2) (list 2) "Sequence test")
    ; string-append-map test
    (check-equal? (string-append-map 
                   (list "dan" "dog" "curry" "dog2") 
