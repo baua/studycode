@@ -39,7 +39,7 @@
    
    ; dan-then-dog test
    (check-equal? (stream-for-n-steps dan-then-dog 1) (list "dan.jpg") "dan-then-dog test")
-   #|
+   
    ; stream-add-zero test
    (check-equal? (stream-for-n-steps (stream-add-zero ones) 1) (list (cons 0 1)) "stream-add-zero test")
    
@@ -49,7 +49,7 @@
    
    ; vector-assoc test
    (check-equal? (vector-assoc 4 (vector (cons 2 1) (cons 3 1) (cons 4 1) (cons 5 1))) (cons 4 1) "vector-assoc test")
-   
+   #|
    ; cached-assoc tests
    (check-equal? ((cached-assoc (list (cons 1 2) (cons 3 4)) 3) 3) (cons 3 4) "cached-assoc test")
    
