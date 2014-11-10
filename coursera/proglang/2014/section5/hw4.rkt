@@ -30,5 +30,37 @@
 ;; problem 4
 (define (stream-for-n-steps stream n)
     (letrec ([f (lambda (stream n)
-                  (if (= n 0) null (cons (stream) (f stream (- n 1)))))])
+                  (let ([pr (stream)])
+                    (if (= n 0) null (cons (car pr) (f (cdr pr) (- n 1))))))])
       (f stream n)))
+
+;; problem 5
+(define funny-number-stream
+  (letrec ([f (lambda (x)
+                (let ([g (lambda () (f (+ x 1)))])
+                       (if (= 0 (modulo x 5)) 
+                           (cons (* x -1) g)
+                           (cons x g))))])
+    (lambda () (f 1))))
+
+;; problem 6
+(define dan-then-dog
+  (letrec ([f (lambda (b)
+                (if b 
+                    (cons "dan.jpg" (lambda () (f #f)))
+                    (cons "dog.jpg" (lambda () (f #t)))))])
+    (lambda () (f #t))))
+  
+;; problem 7
+(define (stream-add-zero stream)
+  (letrec ([f (lambda (stream)
+                (let ([pr (stream)])
+                  (cons (car pr) (lambda () (f (cdr pr))))))])
+    (f stream)))
+#|  
+(define (stream-for-n-steps stream n)
+    (letrec ([f (lambda (stream n)
+                  (let ([pr (stream)])
+                    (if (= n 0) null (cons (car pr) (lambda () (f (cdr pr)) (- n 1))))))])
+      (f stream n)))
+  |#       
