@@ -6,7 +6,7 @@
 ;; problem 1
 (define sequence
   (lambda (low high stride)
-    (cond 
+    (cond
       [(< low high) (cons low (sequence (+ low stride) high stride))]
       [(> low high) null]
       [(or (= low high) (< (- high low) stride)) (cons high null)])))
@@ -22,8 +22,8 @@
     (cond
       [(< n 0) (error "list-nth-mod: negtive number")]
       [(null? xs) (error "list-nth-mod: empty list")]
-      [#t (let 
-             ([pos (remainder n (length xs))]) 
+      [#t (let
+             ([pos (remainder n (length xs))])
              (car (list-tail xs pos)))])))
 
 ;; problem 4
@@ -37,7 +37,7 @@
 (define funny-number-stream
   (letrec ([f (lambda (x)
                 (let ([g (lambda () (f (+ x 1)))])
-                       (if (= 0 (modulo x 5)) 
+                       (if (= 0 (modulo x 5))
                            (cons (* x -1) g)
                            (cons x g))))])
     (lambda () (f 1))))
@@ -45,17 +45,17 @@
 ;; problem 6
 (define dan-then-dog
   (letrec ([f (lambda (b)
-                (if b 
+                (if b
                     (cons "dan.jpg" (lambda () (f #f)))
                     (cons "dog.jpg" (lambda () (f #t)))))])
     (lambda () (f #t))))
-  
+
 ;; problem 7
 (define (stream-add-zero stream)
   (define (thunk x)
     (cons (cons 0 (car (x))) (lambda () (thunk (cdr (x))))))
   (lambda () (thunk stream)))
-    
+
 ;; problem 8
 (define (cycle-lists xs ys)
   (define (thunk c)
@@ -66,16 +66,16 @@
 (define (vector-assoc v vec)
   (letrec ([l (vector-length vec)]
            [f (lambda (pos)
-                (if (= pos l) 
-                    #f 
+                (if (= pos l)
+                    #f
                     (let ([vpos (vector-ref vec pos)])
-                      (if (not (pair? vpos)) 
+                      (if (not (pair? vpos))
                           (f (+ pos 1))
                           (if (equal? v (car vpos))
                               vpos
                               (f (+ pos 1)))))))])
     (f 0)))
-           
+
 ;; problem 10
 ;;(define (cached-assoc xs n)
 
